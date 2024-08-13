@@ -1,12 +1,5 @@
 const pool = require("../db");
-//
-//
-//
-//
-//
-//
-//
-//
+
 const getAllBooks = async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM items");

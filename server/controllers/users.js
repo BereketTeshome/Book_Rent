@@ -1,13 +1,6 @@
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-//
-//
-//
-//
-//
-//
-//
 
 const getUsers = async (req, res) => {
   try {
