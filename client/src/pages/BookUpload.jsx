@@ -59,7 +59,7 @@ const BookUpload = () => {
       const snapshot = await uploadBytes(imageRef, imageUpload);
       const url = await getDownloadURL(snapshot.ref);
 
-      await axios.post("http://localhost:5000/books", {
+      await axios.post("https://book-rent-zeta.vercel.app/books", {
         bookno: randomNum,
         status: true,
         price: book.price,

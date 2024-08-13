@@ -33,7 +33,7 @@ const BookStatusTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/books")
+      .get("https://book-rent-zeta.vercel.app/books")
       .then((response) => {
         let allData = response.data;
         let filteredData =
@@ -122,7 +122,7 @@ const BookStatusTable = () => {
   const handleEditSubmit = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/books/${selectedBook.id}`
+        `https://book-rent-zeta.vercel.app/books/${selectedBook.id}`
       );
       const fetchedValues = response.data;
 
@@ -142,7 +142,7 @@ const BookStatusTable = () => {
       };
 
       await axios.put(
-        `http://localhost:5000/books/${selectedBook.id}`,
+        `https://book-rent-zeta.vercel.app/books/${selectedBook.id}`,
         updatedBook
       );
 
@@ -195,7 +195,7 @@ const BookStatusTable = () => {
   const handleDelete = async (id) => {
     try {
       window.location.reload();
-      await axios.delete(`http://localhost:5000/books/${id}`);
+      await axios.delete(`https://book-rent-zeta.vercel.app/books/${id}`);
       setData((prevData) => prevData.filter((book) => book.id !== id));
     } catch (error) {
       console.error("Error deleting book:", error);

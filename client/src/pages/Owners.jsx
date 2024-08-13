@@ -28,11 +28,13 @@ const Owners = () => {
     const fetchData = async () => {
       try {
         const usersResponse = await axios.get(
-          "http://localhost:5000/accounts/users"
+          "https://book-rent-zeta.vercel.app/accounts/users"
         );
         const usersData = usersResponse.data.filter((item) => !item.isadmin);
 
-        const booksResponse = await axios.get("http://localhost:5000/books");
+        const booksResponse = await axios.get(
+          "https://book-rent-zeta.vercel.app/books"
+        );
         const booksData = booksResponse.data;
 
         const ownersData = usersData.map((user) => {
@@ -74,7 +76,9 @@ const Owners = () => {
   const handleDelete = async (id) => {
     try {
       window.location.reload();
-      await axios.delete(`http://localhost:5000/accounts/users/${id}`);
+      await axios.delete(
+        `https://book-rent-zeta.vercel.app/accounts/users/${id}`
+      );
       setData((prevData) => prevData.filter((book) => book.id !== id));
     } catch (error) {
       console.error("Error deleting book:", error);

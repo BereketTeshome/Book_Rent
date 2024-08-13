@@ -5,10 +5,10 @@ import axios from "axios";
 
 const Books = () => {
   const [data, setData] = useState([]);
-
+  https://book-rent-zeta.vercel.app
   useEffect(() => {
     axios
-      .get("http://localhost:5000/books")
+      .get("https://book-rent-zeta.vercel.app/books")
       .then((response) => {
         const fetchedData = response.data.map((book) => ({
           author: book.author || "Harry",

@@ -12,7 +12,7 @@ const Dashboard = () => {
   const [percentageChange, setPercentageChange] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/books")
+    fetch("https://book-rent-zeta.vercel.app/books")
       .then((response) => response.json())
       .then((data) => {
         let total = 0;
