@@ -22,6 +22,7 @@ const BookStatusTable = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [editedBook, setEditedBook] = useState({});
+  const [itemStatus, setItemStatus] = useState(false);
   const cookie = new Cookies();
   const token = cookie.get("user_token");
   const filteredToken = token ? token : sessionStorage.getItem("user_token");
@@ -41,9 +42,13 @@ const BookStatusTable = () => {
             ? allData
             : allData.filter((item) => {
                 if (item.owner === owner) {
+                  if (item.price > 0) {
+                    setItemStatus(!itemStatus);
+                  }
                   return item;
                 }
               });
+
         const fetchedData = filteredData.map((item) => ({
           id: item.id,
           bookNum: (
@@ -80,12 +85,12 @@ const BookStatusTable = () => {
                 sx={{
                   width: 17,
                   height: 17,
-                  background: item.status === true ? "#00ABFF" : "red",
+                  background: item.price < 1 === true ? "#00ABFF" : "red",
                   borderRadius: "100%",
                 }}
               ></Box>
               <Typography fontSize={13.6}>
-                {item.status === true ? "Free" : "Rented"}
+                {item.price < 1 === true ? "Free" : "Rented"}
               </Typography>
             </Box>
           ),
@@ -187,6 +192,7 @@ const BookStatusTable = () => {
       );
 
       setEditModalOpen(false);
+      window.location.reload();
     } catch (error) {
       console.error("Error updating book:", error);
     }
