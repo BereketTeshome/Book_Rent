@@ -41,10 +41,12 @@ const Owners = () => {
           const userBooks = booksData.filter(
             (book) => book.owner === user.name
           );
+
           const totalQuantity = userBooks.reduce(
-            (sum, book) => sum + book.quantity,
+            (sum, book) => sum + parseFloat(book.quantity || 0),
             0
           );
+
           return { ...user, upload: totalQuantity };
         });
 
@@ -114,19 +116,23 @@ const Owners = () => {
         accessorKey: "upload",
         header: "Upload",
         size: 120,
-        Cell: ({ cell }) => (
-          <Typography
-            sx={{
-              textAlign: "center",
-              borderRadius: "4px",
-              width: "fit-content",
-              textTransform: "capitalize",
-            }}
-          >
-            {cell.getValue()}
-          </Typography>
-        ),
+        Cell: ({ cell }) => {
+          const uploadValue = parseFloat(cell.getValue());
+          return (
+            <Typography
+              sx={{
+                textAlign: "center",
+                borderRadius: "4px",
+                width: "fit-content",
+                textTransform: "capitalize",
+              }}
+            >
+              {uploadValue}
+            </Typography>
+          );
+        },
       },
+
       {
         accessorKey: "location",
         header: "Location",

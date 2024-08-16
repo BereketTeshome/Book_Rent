@@ -51,6 +51,8 @@ const Dashboard = () => {
           px: 1,
           width: "256px",
           height: "fit-content",
+          position: "sticky",
+          top: 80,
         }}
       >
         <Typography
