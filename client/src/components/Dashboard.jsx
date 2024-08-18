@@ -143,7 +143,6 @@ const Dashboard = () => {
             </Typography>
           </Typography>
         </Box>
-        {/* pie chart component */}
         <PieChartComponent />
       </Box>
       <Box sx={{ width: "100%", pr: 1 }}>

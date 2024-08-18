@@ -47,7 +47,9 @@ const Owners = () => {
             0
           );
 
-          return { ...user, upload: totalQuantity };
+          const isapproved = totalQuantity > 0;
+
+          return { ...user, upload: totalQuantity, isapproved };
         });
 
         setData(ownersData);
