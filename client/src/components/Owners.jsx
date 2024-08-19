@@ -110,7 +110,9 @@ const Owners = () => {
               width="22px"
               height="22px"
             />
-            <Typography>{cell.getValue()}</Typography>
+            <Typography textTransform="capitalize">
+              {cell.getValue().split(" ")[0]}
+            </Typography>
           </Box>
         ),
       },
@@ -120,18 +122,7 @@ const Owners = () => {
         size: 120,
         Cell: ({ cell }) => {
           const uploadValue = parseFloat(cell.getValue());
-          return (
-            <Typography
-              sx={{
-                textAlign: "center",
-                borderRadius: "4px",
-                width: "fit-content",
-                textTransform: "capitalize",
-              }}
-            >
-              {uploadValue}
-            </Typography>
-          );
+          return <Typography>{uploadValue}</Typography>;
         },
       },
 
@@ -140,16 +131,7 @@ const Owners = () => {
         header: "Location",
         size: 120,
         Cell: ({ cell }) => (
-          <Typography
-            sx={{
-              textAlign: "center",
-              borderRadius: "4px",
-              width: "fit-content",
-              textTransform: "capitalize",
-            }}
-          >
-            {cell.getValue()}
-          </Typography>
+          <Typography textTransform="capitalize">{cell.getValue()}</Typography>
         ),
       },
       {

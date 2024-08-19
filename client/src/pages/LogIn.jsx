@@ -68,7 +68,6 @@ const LogIn = () => {
       setErrors({ general: error.message });
     }
   };
-  console.log(rememberMe);
   return (
     <Box sx={{ width: "100%", display: "flex" }}>
       <Box

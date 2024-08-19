@@ -28,12 +28,10 @@ const PieChartComponent = () => {
           isAdmin === "admin"
             ? data
             : data.filter((item) => {
-                console.log(item.owner);
                 if (item.owner === owner) {
                   return item;
                 }
               });
-        console.log(filteredData);
         const counts = {
           fiction: 0,
           selfhelp: 0,

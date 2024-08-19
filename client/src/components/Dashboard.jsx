@@ -40,6 +40,7 @@ const Dashboard = () => {
         display: "flex",
         gap: 1,
         width: "100%",
+        pl: 2,
       }}
     >
       <Box

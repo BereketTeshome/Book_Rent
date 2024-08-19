@@ -11,7 +11,7 @@ import {
   DialogActions,
   Alert,
 } from "@mui/material";
-import BookUploadComponent from "../components/BookUploadComponent";
+import BookUploadComponent from "./BookUploadComponent";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 import { storage } from "../assets/config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";

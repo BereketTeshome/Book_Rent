@@ -1,13 +1,10 @@
 import React from "react";
 import { Box } from "@mui/material";
-import Dashboard from "../components/Dashboard";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
-  return (
-    <Box maxWidth paddingLeft={2}>
-      <Dashboard />
-    </Box>
-  );
+  const component = useSelector((state) => state.component.component);
+  return <Box>{component}</Box>;
 };
 
 export default HomePage;

@@ -17,45 +17,43 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { useLocation } from "react-router-dom";
 import { defineAbilitiesFor } from "../../util/abilities.js";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+import { changeComponent } from "../features/ComponentSlice.jsx";
 
 const Sidebar = () => {
-  const location = useLocation().pathname.split("/")[1];
+  const location = useSelector((state) => state.component.location);
   const drawerWidth = 240;
-  const [isDisable, setIsDisable] = useState(false);
   const navigate = useNavigate();
   const cookie = new Cookies();
   const token = cookie.get("user_token");
   const filteredToken = token ? token : sessionStorage.getItem("user_token");
   const decodedToken = filteredToken ? jwtDecode(filteredToken) : "";
   const isAdmin = `${decodedToken.isadmin ? "admin" : "owner"}`;
-  const [role, setRole] = useState(isAdmin);
+  const [role, _] = useState(isAdmin);
   const ability = defineAbilitiesFor(role);
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     if (cookie.get("user_token")) {
       cookie.remove("user_token");
       navigate("/login");
-      window.location.reload();
     } else if (sessionStorage.getItem("user_token")) {
       sessionStorage.removeItem("user_token");
       navigate("/login");
-      window.location.reload();
     }
+
+    dispatch(changeComponent("loggedOut"));
   };
-
   useEffect(() => {
-    if (location === "login" || location === "signup") {
-      setIsDisable(true);
-    } else {
-      setIsDisable(false);
+    if (!filteredToken) {
+      dispatch(changeComponent("loggedOut"));
+      navigate("/login");
     }
-  }, [location]);
-
+  }, [filteredToken, dispatch, navigate]);
   const drawerLinks1 = [
     {
       text: "Dashboard",
@@ -103,7 +101,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <Box sx={isDisable && { display: "none" }}>
+    <Box sx={location === "loggedOut" && { display: "none" }}>
       <AppBar
         sx={{
           width: `calc(100% - ${drawerWidth}px)`,
@@ -188,7 +186,7 @@ const Sidebar = () => {
                   {drawerLinks1.map((item, index) => (
                     <ListItemButton
                       key={index}
-                      to={`/${item.path ? item.path : ""}`}
+                      onClick={() => dispatch(changeComponent(item.path))}
                       sx={{
                         borderRadius: 1,
                         bgcolor: `${location === item.path && "#00ABFF"}`,
